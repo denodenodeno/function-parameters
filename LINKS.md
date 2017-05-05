@@ -1,0 +1,9 @@
+https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Functions
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments
+https://en.wikipedia.org/wiki/Arity
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Function/length
+https://github.com/tc39/proposal-object-rest-spread
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+http://exploringjs.com/es6/ch_destructuring.html

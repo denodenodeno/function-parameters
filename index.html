@@ -1,0 +1,381 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <title>Function parameters</title>
+
+    <meta name="description" content="this keyword in JavaScript">
+    <meta name="author" content="Denislav Ganchev">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,400italic,300italic' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+
+    <div class="slides">
+        <section>
+            <h2><span class="color__yellow">Function Parameters</span></h2>
+        </section>
+
+        <section>
+            <h2 class="color__yellow">What is a function?</h2>
+            <p>In JS functions are <span class="color__yellow">values</span></p>
+
+            <pre>
+				<code data-trim data-no-escape>
+					function id(x) {
+						return x;
+					}
+				</code>
+			</pre>
+        </section>
+
+        <section>
+            <h2 class="color__yellow">Different roles of JavaScript Functions</h2>
+            <section>
+                <p class="color__blue">Non Method function</p>
+                <pre>
+                    <code data-trim data-no-escape>
+                        id('e931820d-ec15-43f2-bd1e-4f5a75f182c2');
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <p class="color__blue">Constructor function</p>
+                <pre>
+                    <code data-trim data-no-escape>
+                        new Object();
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <p class="color__blue">Method function</p>
+                <pre>
+                    <code data-trim data-no-escape>
+                        objectInstance.method();
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <h2 class="color__yellow">Parameters and Arguments</h2>
+            <section>
+                <ul>
+                    <li>arguments</li>
+                    <li>parameters</li>
+                    <li>there's no requirement that the number of arguments matches the
+                        number of parameters
+                    </li>
+                </ul>
+
+                <pre>
+					<code data-trim data-no-escape>
+						function add(x, y) { return x + y;}
+						var v = 4;
+						add(v, v * 2); //12
+					</code>
+				</pre>
+
+            </section>
+
+            <section>
+                <h4 class="color__blue">Function arity</h4>
+                <ul>
+                    <li>Function.length property</li>
+                </ul>
+                <pre>
+					<code data-trim data-no-escape>
+						function simpleFunction(a, b, c) { //..}
+
+						simpleFunction.length; //3
+					</code>
+				</pre>
+            </section>
+
+            <section>
+                <h4 class="color__blue">ES2015 Function.length gotchas</h4>
+
+                <pre>
+					<code data-trim data-no-escape>
+						function a(x, y = 4) {//..}
+						function b(x, ...args) {//..}
+						function c({x, y}) {//..}
+
+						a.length; //1
+						b.length; //1
+						c.length; //1
+					</code>
+                </pre>
+            </section>
+
+            <section>
+                <h4 class="color__blue">Determining number of arguments that the current function call has received</h4>
+
+                <pre>
+					<code data-trim data-no-escape>
+                        function add(x, y, z) {
+                            //Array.prototype.slice.call(arguments);
+                            console.log(arguments.length);
+                        }
+
+                        add(1, 2); //2
+                        
+                    </code>
+				</pre>
+			</section>
+
+        </section>
+
+        <section>
+            <h2 class="color__yellow">Rest/Spread operator</h2>
+
+            <section>
+                <h4 class="color__blue">Definition</h4>
+                <pre>
+					<code data-trim data-no-escape>
+						function fn(x, y. z) {
+							console.log(x, y, z);
+						}
+
+						fn(...[3, 4, 5]);
+						//equivalent to fn.apply(null, [3, 4, 5]);
+					</code>
+				</pre>
+            </section>
+
+            <section>
+                <h4 class="color__yellow">Usage</h4>
+            </section>
+
+            <section>
+                <h5 class="color__blue">Spread a value inside another array, replacing .concat() method</h5>
+                <pre>
+                    <code data-trim data-no-escape>
+                        var x = [3, 4, 5];
+                        var y = [1, 2, ...x];
+
+                        console.log(y); //[1, 2, 3, 4, 5]
+                        //is equivalent to [1].concat(x, [5]);
+                    </code>
+                </pre>
+            </section>
+
+
+            <section>
+                <div>
+                    <h5 class="color__blue">Gather a set of values into an array</h5>
+                    <pre>
+                        <code data-trim data-no-escape>
+                            function fn(x, y, ...z) {
+                                console.log(x, y, z);
+                            }
+
+                            fn(1, 2, 3, 4, 5, 6); //1, 2, [3, 4, 5, 6]
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section>
+                <h5 class="color__blue">Rest parameters</h5>
+                <pre>
+                    <code data-trim data-no-escape>
+                        function fn(...args) {
+                            console.log(args);
+                        }
+
+                        fn(1, 2, 3, 4, 5, 6); //[1, 2, 3, 4, 5, 6]
+                    </code>
+                </pre>
+            </section>
+
+        </section>
+
+        <section>
+            <h2 class="color__yellow">Default parameters</h2>
+        </section>
+
+        <section>
+            <section>
+                <h5 class="color__blue">ES5</h5>
+                <pre>
+					<code data-trim data-no-escape>
+						function add(x, y) {
+							x = x || 10;
+							y = y || 20;
+							return x + y;
+						}
+
+						add(); //30
+						add(1, 4); //5
+						add(1); //21
+						add(null, 5); //25
+						add(0, 50); //60 not 50
+
+					</code>
+				</pre>
+
+                <pre>
+					<code data-trim data-no-escape>
+						function add(x, y) {
+							x = (x != undefined) || 10;
+							y = (y != undefined) || 20;
+							return x + y;
+						}
+
+						add(0, 50); //50
+					</code>
+				</pre>
+            </section>
+
+            <section>
+                <h5 class="color__blue">ES2015 way</h5>
+
+                <pre>
+					<code data-trim data-no-escape>
+						function add(x = 10, y = 20) {
+							return x + y;
+						}
+
+						add(); //30
+						add(1, 4); //5
+						add(1); //21
+						add(undefined, 5); //15 -- undefined means missing
+						add(null, 5); //5 -- null coerced to 0
+						add(0, 50); //60 not 50
+
+					</code>
+				</pre>
+            </section>
+
+            <section>
+                <h5 class="color__blue">Default value expressions</h5>
+                <pre>
+					<code data-trim data-no-escape>
+						var y = 10;
+
+						function a(b, c) {
+							return b + c;
+						}
+
+						function b(v = y + 5, m = a(y, 5)) {
+							console.log(v, m);
+						}
+
+						b();//15, 15
+					</code>
+				</pre>
+            </section>
+
+        </section>
+
+        <section>
+            <h2 class="color__yellow">Destructuring</h2>
+            <p>
+                extracting multiple values from data stored in objects and arrays.
+            </p>
+        </section>
+
+        <section>
+            <section>
+                <h5 class="color__blue">Destructuring objects</h5>
+                <pre>
+					<code data-trim data-no-escape>
+						function fn() {
+							return {x: 3, y: 4, z: 5};
+						}
+
+						const {x, y, z} = fn();
+						console.log(x, y, z); //3, 4, 5
+					</code>
+				</pre>
+            </section>
+
+            <section>
+                <h5 class="color__blue">Destructuring arrays</h5>
+                <pre>
+					<code data-trim data-no-escape>
+						function fn() {
+							return [3, 4, 5];
+						}
+
+						const [x, y, z] = fn();
+						console.log(x, y, z); //3, 4, 5
+					</code>
+				</pre>
+            </section>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1200,
+        height: 800,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+</script>
+</body>
+</html>
